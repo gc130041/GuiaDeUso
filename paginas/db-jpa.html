@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../estilos/manual.css">
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <div class="container-fluid">
@@ -20,9 +22,12 @@
                 <div class="accordion accordion-flush sidebar-accordion" id="sidebarAccordion">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingFrontend">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFrontend" aria-expanded="false" aria-controls="collapseFrontend">Frontend</button>
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFrontend" aria-expanded="false"
+                                aria-controls="collapseFrontend">Frontend</button>
                         </h2>
-                        <div id="collapseFrontend" class="accordion-collapse collapse" aria-labelledby="headingFrontend" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseFrontend" class="accordion-collapse collapse" aria-labelledby="headingFrontend"
+                            data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="frontend-html.html">HTML</a>
                                 <a href="frontend-css.html">CSS</a>
@@ -34,9 +39,12 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingBackend">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBackend" aria-expanded="false" aria-controls="collapseBackend">Backend</button>
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseBackend" aria-expanded="false"
+                                aria-controls="collapseBackend">Backend</button>
                         </h2>
-                        <div id="collapseBackend" class="accordion-collapse collapse" aria-labelledby="headingBackend" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseBackend" class="accordion-collapse collapse" aria-labelledby="headingBackend"
+                            data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="backend-maven.html">Maven y pom.xml</a>
                                 <a href="backend-servlet.html">Servlets</a>
@@ -47,9 +55,12 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingDb">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDb" aria-expanded="true" aria-controls="collapseDb">DB / Persistencia</button>
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseDb" aria-expanded="true" aria-controls="collapseDb">DB /
+                                Persistencia</button>
                         </h2>
-                        <div id="collapseDb" class="accordion-collapse collapse show" aria-labelledby="headingDb" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseDb" class="accordion-collapse collapse show" aria-labelledby="headingDb"
+                            data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="db-jpa.html" class="active">JPA</a>
                                 <a href="db-persistence.html">persistence.xml</a>
@@ -62,10 +73,149 @@
             </aside>
             <main class="col-md-9 content">
                 <h1>JPA: Java Persistence API</h1>
-                <div class="placeholder-box">Contenido de JPA...</div>
-            </main>
+                <div class="mb-4">
+                    <h2>Teoría</h2>
+                    <p>La <strong>Java Persistence API (JPA)</strong> es una especificación estándar de Java que permite
+                        a los desarrolladores interactuar con bases de datos relacionales utilizando objetos Java. Su
+                        objetivo principal es el mapeo objeto-relacional (ORM), que consiste en "mapear" los objetos de
+                        una aplicación a las tablas de una base de datos. De esta forma, JPA actúa como un puente entre
+                        el mundo orientado a objetos de Java y el mundo relacional de las bases de datos.</p>
+                    <p>JPA en sí misma no es una herramienta o un framework, sino un conjunto de reglas y directrices.
+                        Son los "proveedores de persistencia" como Hibernate, EclipseLink o TopLink quienes implementan
+                        esta especificación, ofreciendo la funcionalidad real. Una de las grandes ventajas de JPA es que
+                        simplifica enormemente la persistencia de datos, eliminando la necesidad de escribir código JDBC
+                        y SQL repetitivo para operaciones comunes de base de datos.</p>
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/DB/DiagramaJPA.jpg" class="img-fluid mx-auto d-block"
+                            alt="Diagrama de la arquitectura de JPA" style="width: 50%;">
+                    </div>
+
+                    <h3>Conceptos Fundamentales</h3>
+                    <ul>
+                        <li><strong>Entidad (Entity):</strong> Es una clase simple de Java (POJO) que se corresponde con
+                            una tabla en la base de datos. Para que JPA la reconozca como tal, debe estar anotada con
+                            <code>@Entity</code>.
+                        </li>
+                        <li><strong>EntityManager:</strong> Es una interfaz clave en JPA que proporciona los métodos
+                            para interactuar con el contexto de persistencia. Es el responsable de gestionar el ciclo de
+                            vida de las entidades, incluyendo operaciones como guardar, actualizar, buscar y eliminar.
+                        </li>
+                        <li><strong>JPQL (Java Persistence Query Language):</strong> Es un lenguaje de consulta similar
+                            a SQL, pero que opera sobre las entidades y sus atributos en lugar de sobre las tablas y
+                            columnas de la base de datos.</li>
+                    </ul>
+                </div>
+
+                <hr>
+
+                <div class="mb-4">
+                    <h2>Práctica</h2>
+                    <p>Para utilizar JPA, es necesario configurar el proyecto y definir las entidades que se van a
+                        persistir. A continuación se describen los pasos y componentes principales involucrados en la
+                        práctica.</p>
+
+                    <h3>Definición de una Entidad</h3>
+                    <p>Una entidad es una clase Java que representa una tabla. Se utilizan anotaciones para mapear la
+                        clase y sus atributos a la tabla y sus columnas correspondientes.</p>
+
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/DB/MapeoTablaJPA.jpg" class="img-fluid mx-auto d-block"
+                            alt="Mapeo de Entidad a Tabla" style="width: 50%;">
+                    </div>
+
+                    <h4>Anotaciones más comunes:</h4>
+                    <ul>
+                        <li><code>@Entity</code>: Marca la clase como una entidad JPA.</li>
+                        <li><code>@Table(name="nombre_tabla")</code>: Especifica el nombre de la tabla en la base de
+                            datos a la que se mapea la entidad.</li>
+                        <li><code>@Id</code>: Designa el atributo que representa la clave primaria de la tabla.</li>
+                        <li><code>@GeneratedValue(strategy = GenerationType.IDENTITY)</code>: Indica que la generación
+                            del valor de la clave primaria es gestionada por la base de datos (autoincremental).</li>
+                        <li><code>@Column(name="nombre_columna")</code>: Especifica el nombre de la columna a la que se
+                            mapea un atributo.</li>
+                    </ul>
+
+                    <h3>El EntityManager</h3>
+                    <p>El <code>EntityManager</code> es la interfaz principal para la persistencia. Se utiliza para
+                        realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre las entidades.</p>
+                    <h4>Métodos clave del EntityManager:</h4>
+                    <ul>
+                        <li><code>persist(entity)</code>: Guarda una nueva entidad en la base de datos, insertando un
+                            nuevo registro.</li>
+                        <li><code>merge(entity)</code>: Actualiza el estado de una entidad existente en la base de
+                            datos. Si la entidad no existe, puede crear una nueva.</li>
+                        <li><code>find(Entity.class, primaryKey)</code>: Busca una entidad por su clave primaria.</li>
+                        <li><code>remove(entity)</code>: Elimina una entidad de la base de datos. La entidad debe estar
+                            gestionada por el contexto de persistencia antes de poder eliminarla.</li>
+                        <li><code>createQuery(jpqlString)</code>: Crea un objeto <code>Query</code> para ejecutar una
+                            consulta JPQL.</li>
+                    </ul>
+                </div>
+
+                <hr>
+
+                <div>
+                    <h2>Ejemplos de Uso</h2>
+                    <p>A continuación se muestran los fragmentos de código clave que ilustran cómo definir una entidad y
+                        realizar operaciones básicas con JPA.</p>
+
+                    <h3>1. Definición de la Entidad "Producto"</h3>
+                    <p>Primero, definimos nuestra clase Java y la anotamos como <code>@Entity</code> para que JPA pueda
+                        gestionarla. Este objeto se mapeará a una tabla en la base de datos.</p>
+                    <pre class="code-block"><code>import javax.persistence.Entity;
+                    import javax.persistence.GeneratedValue;
+                    import javax.persistence.GenerationType;
+                    import javax.persistence.Id;
+                    import javax.persistence.Table;
+
+                    @Entity
+                    @Table(name = "productos")
+                    public class Producto {
+                        @Id
+                        @GeneratedValue(strategy = GenerationType.IDENTITY)
+                        private Long id;
+
+                        private String nombre;
+                        private double precio;
+                    }</code></pre>
+
+                    <h3>2. Operaciones CRUD y Consultas JPQL</h3>
+                    <p>Luego, en nuestra lógica de negocio (por ejemplo, en un Servlet), usamos un
+                        <code>EntityManager</code> para interactuar con la base de datos. Los siguientes ejemplos
+                        muestran cómo crear, leer y consultar productos.
+                    </p>
+
+                    <h4>Crear un nuevo producto (Create)</h4>
+                    <pre class="code-block"><code>Producto nuevoProducto = new Producto();
+                    nuevoProducto.setNombre("Teclado Mecánico");
+                    nuevoProducto.setPrecio(99.99);
+
+                    entityManager.persist(nuevoProducto);</code></pre>
+
+                    <h4>Consultar productos con JPQL (Read)</h4>
+                    <pre class="code-block"><code>String jpql = "SELECT p FROM Producto p";
+                    List<Producto> productos = entityManager.createQuery(jpql, Producto.class)
+                                                            .getResultList();</code></pre>
+
+                    <hr class="my-4">
+
+                    <h3>3. Resultado Final de la Ejecución</h3>
+                    <p>
+                        Al ejecutar el código anterior dentro de nuestro <code>JPATestServlet</code>, se crean los
+                        productos, se persisten en la base de datos en memoria y se recuperan con la consulta JPQL. El
+                        resultado final se muestra en una página JSP, que presentaría una tabla como la siguiente:
+                    </p>
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/DB/ResultadosJPA.png" class="img-fluid mx-auto d-block"
+                            alt="Tabla de resultados mostrando los productos creados y recuperados con JPA"
+                            style="width: 80%;">
+                    </div>
+                </div>
         </div>
+        </main>
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
