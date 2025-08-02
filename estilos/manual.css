@@ -1,0 +1,128 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.page-wrapper {
+    padding-top: 80px;
+}
+
+.sidenav {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 80px;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    background-color: #ffffff;
+    border-right: 1px solid #dee2e6;
+    padding: 20px 0;
+}
+
+.sidebar-accordion .accordion-item {
+    border: none;
+}
+
+.sidebar-accordion .accordion-button {
+    background-color: #ffffff;
+    color: #212529;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.sidebar-accordion .accordion-button:not(.collapsed) {
+    color: #0d6efd;
+    background-color: #e7f1ff;
+}
+
+.sidebar-accordion .accordion-button:hover {
+    background-color: #f8f9fa;
+}
+
+.sidebar-accordion .accordion-button::after {
+    background-image: none;
+    font-family: 'bootstrap-icons';
+    content: '\F282';
+    font-size: 1rem;
+    transform: none;
+    font-weight: bold;
+}
+
+.sidebar-accordion .accordion-button:not(.collapsed)::after {
+    content: '\F286';
+}
+
+.sidebar-accordion .accordion-body {
+    padding: 0;
+}
+
+.sidebar-accordion .accordion-body a {
+    display: block;
+    padding: 0.75rem 1.25rem 0.75rem 2.5rem;
+    color: #212529;
+    text-decoration: none;
+    position: relative;
+}
+
+.sidebar-accordion .accordion-body a:hover {
+    background-color: #f1f1f1;
+}
+
+.sidebar-accordion .accordion-body a.active {
+    background-color: #e9ecef;
+    font-weight: bold;
+    color: #0a58ca;
+}
+
+.sidebar-accordion .accordion-body a.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #0d6efd;
+}
+
+.content {
+    padding: 2rem;
+}
+
+.content h1 {
+    color: #0d6efd;
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.content h2 {
+    color: #343a40;
+    margin-top: 2rem;
+}
+
+.code-block {
+    background-color: #282c34;
+    color: #abb2bf;
+    padding: 1rem;
+    border-radius: 8px;
+    white-space: pre-wrap;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.placeholder-box {
+    border-left: 5px solid #0d6efd;
+    background-color: #f0f6ff;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+}
