@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../estilos/manual.css">
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <div class="container-fluid">
@@ -20,9 +22,12 @@
                 <div class="accordion accordion-flush sidebar-accordion" id="sidebarAccordion">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingFrontend">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFrontend" aria-expanded="false" aria-controls="collapseFrontend">Frontend</button>
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFrontend" aria-expanded="false"
+                                aria-controls="collapseFrontend">Frontend</button>
                         </h2>
-                        <div id="collapseFrontend" class="accordion-collapse collapse" aria-labelledby="headingFrontend" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseFrontend" class="accordion-collapse collapse" aria-labelledby="headingFrontend"
+                            data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="frontend-html.html">HTML</a>
                                 <a href="frontend-css.html">CSS</a>
@@ -34,9 +39,12 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingBackend">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBackend" aria-expanded="false" aria-controls="collapseBackend">Backend</button>
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseBackend" aria-expanded="false"
+                                aria-controls="collapseBackend">Backend</button>
                         </h2>
-                        <div id="collapseBackend" class="accordion-collapse collapse" aria-labelledby="headingBackend" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseBackend" class="accordion-collapse collapse" aria-labelledby="headingBackend"
+                            data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="backend-maven.html">Maven y pom.xml</a>
                                 <a href="backend-servlet.html">Servlets</a>
@@ -47,9 +55,12 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingDb">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDb" aria-expanded="true" aria-controls="collapseDb">DB / Persistencia</button>
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseDb" aria-expanded="true" aria-controls="collapseDb">DB /
+                                Persistencia</button>
                         </h2>
-                        <div id="collapseDb" class="accordion-collapse collapse show" aria-labelledby="headingDb" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseDb" class="accordion-collapse collapse show" aria-labelledby="headingDb"
+                            data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="db-jpa.html">JPA</a>
                                 <a href="db-persistence.html">persistence.xml</a>
@@ -62,10 +73,123 @@
             </aside>
             <main class="col-md-9 content">
                 <h1>JNDI y JDBC</h1>
-                <div class="placeholder-box">Contenido de JNDI y JDBC...</div>
+                <div class="mb-4">
+                    <h2>Teoría</h2>
+
+                    <h3>¿Qué es JDBC?</h3>
+                    <p><strong>JDBC (Java Database Connectivity)</strong> es la API estándar de Java que define cómo un
+                        cliente puede acceder a una base de datos. Proporciona los métodos para conectarse a una base de
+                        datos, enviar consultas SQL y procesar los resultados. JDBC es la base para casi toda la
+                        interacción con bases de datos en Java, pero su uso directo puede ser verboso y requiere manejar
+                        manualmente las conexiones, sentencias y resultados.</p>
+
+                    <h3>¿Qué es JNDI?</h3>
+                    <p><strong>JNDI (Java Naming and Directory Interface)</strong> es una API de Java que permite a las
+                        aplicaciones buscar recursos (como objetos o datos) a través de un nombre. Actúa como un
+                        "directorio telefónico" o un sistema de nombres centralizado. En el contexto de aplicaciones
+                        web, su uso más común es para buscar un <strong>DataSource</strong>, que es un objeto que
+                        representa una fuente de datos, como una base de datos configurada en el servidor.</p>
+
+                    <h3>La Combinación Perfecta: JNDI + JDBC</h3>
+                    <p>En lugar de que la aplicación cree conexiones JDBC directamente (incrustando la URL de la base de
+                        datos, usuario y contraseña en el código), el administrador del servidor configura un
+                        <strong>DataSource</strong> y lo registra en JNDI con un nombre lógico (ej.
+                        <code>jdbc/miBaseDeDatos</code>). La aplicación simplemente busca este nombre en JNDI para
+                        obtener una conexión lista para usar.
+                    </p>
+                    <p>Esta práctica ofrece enormes ventajas:</p>
+                    <ul>
+                        <li><strong>Desacoplamiento:</strong> El código de la aplicación no depende de los detalles de
+                            la base de datos. Se puede cambiar la base de datos (de desarrollo a producción, por
+                            ejemplo) sin modificar ni recompilar la aplicación.</li>
+                        <li><strong>Gestión Centralizada:</strong> La configuración de la conexión se gestiona en un
+                            solo lugar: el servidor de aplicaciones.</li>
+                        <li><strong>Connection Pooling:</strong> Los DataSources configurados en el servidor
+                            generalmente gestionan un pool de conexiones, lo que mejora drásticamente el rendimiento al
+                            reutilizar conexiones existentes en lugar de crear nuevas para cada petición.</li>
+                    </ul>
+
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes//DB/JDBCFlujo.jpg" class="img-fluid mx-auto d-block "
+                            alt="Diagrama del flujo de JNDI y JDBC" style="width: 50%;">
+                    </div>
+                </div>
+
+                <hr>
+
+                <div>
+                    <h2>Práctica y Ejemplo</h2>
+                    <p>El proceso consta de dos partes: la configuración en el servidor (que realiza un administrador) y
+                        el uso en la aplicación (que realiza el desarrollador).</p>
+
+                    <h3>Paso 1: Configurar el Recurso JNDI en el Servidor</h3>
+                    <p>El administrador del servidor debe definir el DataSource. En servidores como Tomcat, esto se hace
+                        en el archivo <code>context.xml</code>. En GlassFish, se puede hacer a través de la consola de
+                        administración o en el archivo <code>glassfish-web.xml</code>. El siguiente es un ejemplo para
+                        <code>context.xml</code>, definiendo un recurso JNDI llamado
+                        <strong><code>jdbc/myAppDB</code></strong>
+                    </p>
+                    <pre class="code-block"><code>name="jdbc/myAppDB"
+                    auth="Container"
+                    type="javax.sql.DataSource"
+                    maxTotal="100" 
+                    maxIdle="30" 
+                    maxWaitMillis="10000"
+                    username="sa"
+                    password=""
+                    driverClassName="org.h2.Driver"
+                    url="jdbc:h2:mem:testdb"/></code></pre>
+                    <h3>Paso 2: Acceder al DataSource y Usar JDBC</h3>
+                    <p>Una vez configurado el recurso, la aplicación puede buscarlo por su nombre JNDI para obtener una
+                        conexión. El siguiente ejemplo en un Servlet busca <code>java:comp/env/jdbc/myAppDB</code>,
+                        obtiene una conexión y ejecuta una consulta SQL simple.</p>
+                    <pre class="code-block"><code>import javax.naming.Context;
+                    import javax.naming.InitialContext;
+                    import javax.sql.DataSource;
+                    import java.sql.Connection;
+                    import java.sql.ResultSet;
+                    import java.sql.Statement;
+                    // ... en un método de un Servlet ...
+                    try {
+                    // 1. Iniciar el contexto JNDI
+                    Context initContext = new InitialContext();
+                    Context envContext = (Context) initContext.lookup("java:comp/env");
+                    // 2. Buscar el DataSource por su nombre JNDI
+                    DataSource ds = (DataSource) envContext.lookup("jdbc/myAppDB");
+
+                    // 3. Obtener una conexión JDBC del pool
+                    try (Connection conn = ds.getConnection()) {
+                        
+                        // 4. Usar la conexión JDBC para ejecutar SQL
+                        Statement stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT 'Conexión Exitosa' AS RESULT");
+
+                        if (rs.next()) {
+                            String resultado = rs.getString("RESULT");
+                            // Guardar el resultado para mostrarlo en una página JSP
+                            request.setAttribute("resultadoJDBC", resultado);
+                        }
+                    }
+                    } catch (Exception e) {
+                    // Manejo de errores
+                    e.printStackTrace();
+                    }</code></pre>
+
+                    <h3>Paso 3: Resultado Final de la Conexión</h3>
+                    <p>Al invocar el Servlet que contiene el código anterior, este se conecta a la base de datos a
+                        través de JNDI y JDBC, ejecuta la consulta y muestra el resultado en una página. Esto confirma
+                        que todo el flujo, desde la configuración del servidor hasta la ejecución del código, ha
+                        funcionado correctamente.</p>
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/DB/JNDIResult.png" class="img-fluid mx-auto d-block"
+                            alt="'Conexión Exitosa' obtenido vía JNDI/JDBC"
+                            style="width: 70%;">
+                    </div>
+                </div>
             </main>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
