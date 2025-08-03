@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../estilos/manual.css">
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <div class="container-fluid">
@@ -20,9 +22,12 @@
                 <div class="accordion accordion-flush sidebar-accordion" id="sidebarAccordion">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingFrontend">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFrontend" aria-expanded="false" aria-controls="collapseFrontend">Frontend</button>
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFrontend" aria-expanded="false"
+                                aria-controls="collapseFrontend">Frontend</button>
                         </h2>
-                        <div id="collapseFrontend" class="accordion-collapse collapse" aria-labelledby="headingFrontend" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseFrontend" class="accordion-collapse collapse" aria-labelledby="headingFrontend"
+                            data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="frontend-html.html">HTML</a>
                                 <a href="frontend-css.html">CSS</a>
@@ -34,9 +39,12 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingBackend">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBackend" aria-expanded="false" aria-controls="collapseBackend">Backend</button>
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseBackend" aria-expanded="false"
+                                aria-controls="collapseBackend">Backend</button>
                         </h2>
-                        <div id="collapseBackend" class="accordion-collapse collapse" aria-labelledby="headingBackend" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseBackend" class="accordion-collapse collapse" aria-labelledby="headingBackend"
+                            data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="backend-maven.html">Maven y pom.xml</a>
                                 <a href="backend-servlet.html">Servlets</a>
@@ -47,9 +55,12 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingDb">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDb" aria-expanded="true" aria-controls="collapseDb">DB / Persistencia</button>
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseDb" aria-expanded="true" aria-controls="collapseDb">DB /
+                                Persistencia</button>
                         </h2>
-                        <div id="collapseDb" class="accordion-collapse collapse show" aria-labelledby="headingDb" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseDb" class="accordion-collapse collapse show" aria-labelledby="headingDb"
+                            data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="db-jpa.html">JPA</a>
                                 <a href="db-persistence.html" class="active">persistence.xml</a>
@@ -61,11 +72,131 @@
                 </div>
             </aside>
             <main class="col-md-9 content">
-                <h1>El Archivo persistence.xml</h1>
-                <div class="placeholder-box">Contenido de persistence.xml...</div>
+                <h1>Persistence.xml</h1>
+                <div class="mb-4">
+                    <h2>Teoría</h2>
+                    <p>El archivo <strong>persistence.xml</strong> es una pieza fundamental en la configuración de
+                        cualquier aplicación que utilice Java Persistence API (JPA). Actúa como el centro de
+                        configuración, definiendo cómo se conectará la aplicación a la base de datos y qué clases de
+                        entidad gestionará.</p>
+                    <h3>¿Qué es el archivo persistence.xml?</h3>
+                    <p>El archivo <strong>persistence.xml</strong> es un fichero de configuración estándar de JPA,
+                        escrito en XML. Su propósito principal es definir una o más "unidades de persistencia". Una
+                        unidad de persistencia agrupa la configuración necesaria para que el motor de JPA pueda
+                        gestionar las entidades y conectarse a una base de datos específica.</p>
+                    <p>Este archivo debe estar ubicado en el directorio <strong>META-INF</strong> dentro del classpath
+                        de tu proyecto.</p>
+
+                    <div class="placeholder-box my-3">
+                        <div class="text-center">
+                            <img src="../imagenes/DB/persistence.jpeg" alt="Ubicacion de persistence"
+                                style="width: 50%;">
+                        </div>
+                    </div>
+
+                    <h3>Estructura Básica</h3>
+                    <p>La estructura del archivo es relativamente sencilla. El elemento raíz es <strong>
+                            <persistence>
+                        </strong>, que contiene uno o más elementos <strong><persistence-unit></strong>.</p>
+                    <pre class="code-block"><code>persistence
+    
+    persistence-unit (name="nombre-de-tu-unidad", transaction-type="RESOURCE_LOCAL")
+
+        --- Aquí va el resto de la configuración ---
+    
+    /persistence-unit
+
+/persistence</code></pre>
+                </div>
+
+                <hr>
+
+                <div class="mb-4">
+                    <h2>Elementos de Configuración</h2>
+                    <p>Dentro de una <strong><persistence-unit></strong>, se configuran todos los aspectos del
+                        comportamiento de JPA. A continuación, se describen los elementos más importantes.</p>
+
+                    <div class="placeholder-box my-3">
+                        <div class="text-center p-4 bg-light border">
+                            <img src="../imagenes/DB/diagramaPersistence.png" class="img-fluid mx-auto d-block"
+                                alt="Mapeo de Entidad a Tabla">
+                        </div>
+                    </div>
+
+                    <h3>El Elemento <persistence-unit></h3>
+                    <p>Es el corazón del archivo y contiene toda la configuración de una conexión. Sus atributos
+                        principales son:</p>
+                    <ul>
+                        <li><strong>name</strong>: Nombre único para identificar la unidad de persistencia en el código
+                            Java.</li>
+                        <li><strong>transaction-type</strong>: Puede ser <strong>JTA</strong> para entornos
+                            empresariales o <strong>RESOURCE_LOCAL</strong> para aplicaciones más simples.</li>
+                    </ul>
+
+                    <h4>Proveedor de Persistencia (<provider>)</h4>
+                    <p>Especifica la implementación de JPA a utilizar (por ejemplo, Hibernate, EclipseLink, etc.).</p>
+                    <pre class="code-block"><code>provider: org.hibernate.jpa.HibernatePersistenceProvider</code></pre>
+
+                    <h4>Clases Gestionadas (<class>)</h4>
+                    <p>Lista las clases de entidad que serán gestionadas por esta unidad de persistencia.</p>
+                    <pre class="code-block"><code>class: com.miempresa.modelo.Usuario
+class: com.miempresa.modelo.Producto</code></pre>
+
+                    <h4>Propiedades (<properties>)</h4>
+                    <p>El elemento <strong>
+                            <properties>
+                        </strong> contiene un conjunto de etiquetas <strong>
+                            <property>
+                        </strong> para la configuración de la base de datos y del proveedor JPA.</p>
+                    <p>Propiedades de conexión estándar de JDBC:</p>
+                    <ul>
+                        <li><strong>javax.persistence.jdbc.driver</strong></li>
+                        <li><strong>javax.persistence.jdbc.url</strong></li>
+                        <li><strong>javax.persistence.jdbc.user</strong></li>
+                        <li><strong>javax.persistence.jdbc.password</strong></li>
+                    </ul>
+                    <p>Propiedades comunes de Hibernate:</p>
+                    <ul>
+                        <li><strong>hibernate.dialect</strong>: Adapta el SQL a la base de datos específica.</li>
+                        <li><strong>hibernate.show_sql</strong>: Muestra en consola las sentencias SQL ejecutadas.</li>
+                        <li><strong>hibernate.hbm2ddl.auto</strong>: Controla la generación del esquema de la base de
+                            datos (ej: <strong>update</strong>).</li>
+                    </ul>
+                </div>
+
+                <hr>
+
+                <div>
+                    <h2>Ejemplo Completo</h2>
+                    <p>A continuación, se muestra un archivo <strong>persistence.xml</strong> completo para una
+                        aplicación con Hibernate y MySQL.</p>
+                    <pre class="code-block"><code>persistence-unit (name="miUnidadDePersistencia", transaction-type="RESOURCE_LOCAL")
+
+    provider: org.hibernate.jpa.HibernatePersistenceProvider
+
+    class: com.miempresa.modelo.Usuario
+    class: com.miempresa.modelo.Producto
+    class: com.miempresa.modelo.Pedido
+
+    properties:
+        
+        property (name="javax.persistence.jdbc.driver", value="com.mysql.cj.jdbc.Driver")
+        property (name="javax.persistence.jdbc.url", value="jdbc:mysql://localhost:3306/mi_db")
+        property (name="javax.persistence.jdbc.user", value="mi_usuario")
+        property (name="javax.persistence.jdbc.password", value="mi_contraseña")
+
+        property (name="hibernate.dialect", value="org.hibernate.dialect.MySQLDialect")
+        property (name="hibernate.show_sql", value="true")
+        property (name="hibernate.hbm2ddl.auto", value="update")
+
+    /properties
+
+/persistence-unit</code></pre>
+                </div>
             </main>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
