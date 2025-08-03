@@ -61,11 +61,108 @@
                 </div>
             </aside>
             <main class="col-md-9 content">
+                <main class="col-md-9 content">
                 <h1>JSF: JavaServer Faces</h1>
-                <div class="placeholder-box">Contenido de JSF...</div>
+
+                <div class="mb-4">
+                    <h2>¿Qué es JSF?</h2>
+                    <p><strong>JavaServer Faces (JSF)</strong> es un framework de Java para la construcción de interfaces de usuario web basadas en componentes reutilizables. Es parte de la plataforma Java EE y permite separar claramente la lógica de negocio, la presentación y la navegación.</p>
+                    
+                    <div class="placeholder-box my-3">
+                        <!-- Imagen 1: Diagrama general de JSF -->
+                        <img src="../imagenes/Frontend/realcion del Bean.png" class="img-fluid mx-auto d-block" alt="Diagrama general de JSF" style="width: 50%;">
+                        <!-- Reemplazá esta ruta con tu imagen local -->
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="mb-4">
+                    <h2>Características Principales</h2>
+                    <ul>
+                        <li>Basado en componentes reutilizables.</li>
+                        <li>Integración con expresiones EL para acceder a datos del backend.</li>
+                        <li>Soporte para validación, conversión, internacionalización y manejo de eventos.</li>
+                        <li>Administración automática del ciclo de vida de la vista.</li>
+                    </ul>
+                </div>
+
+                <hr>
+
+                <div class="mb-4">
+                    <h2>Estructura Básica de una Página JSF</h2>
+                    <pre class="code-block"><code>&lt;!DOCTYPE html&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"&gt;
+  &lt;h:head&gt;
+    &lt;title&gt;Mi primera página JSF&lt;/title&gt;
+  &lt;/h:head&gt;
+  &lt;h:body&gt;
+    &lt;h:form&gt;
+      &lt;h:outputText value="Hola, JSF!" /&gt;
+    &lt;/h:form&gt;
+  &lt;/h:body&gt;
+&lt;/html&gt;
+                    </code></pre>
+
+                    <div class="placeholder-box my-3">
+                        <!-- Imagen 2: Captura de una página JSF funcionando -->
+                        <img src="../imagenes/Frontend/Ejemplo JSF.png" class="img-fluid mx-auto d-block" alt="Ejemplo de página JSF" style="width: 50%;">
+                        <!-- Reemplazá esta ruta con tu imagen local -->
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="mb-4">
+                    <h2>Managed Beans</h2>
+                    <p>Un <strong>Managed Bean</strong> es una clase Java que actúa como controlador para JSF, y se enlaza con las vistas mediante expresiones EL.</p>
+
+                    <pre class="code-block"><code>@ManagedBean
+public class SaludoBean {
+    private String mensaje = "¡Hola desde JSF!";
+
+    public String getMensaje() {
+        return mensaje;
+    }
+
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
+    }
+}</code></pre>
+
+                    <div class="placeholder-box my-3">
+                        <!-- Imagen 3: Diagrama Bean - Vista JSF -->
+                        <img src="../imagenes/Frontend/jsf-generando-html.png" class="img-fluid mx-auto d-block" alt="Relación entre Bean y Vista" style="width: 50%;">
+                        <!-- Reemplazá esta ruta con tu imagen local -->
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="mb-4">
+                    <h2>Ejemplo: Enlace entre Bean y Vista</h2>
+                    <p>HTML (JSF):</p>
+                    <pre class="code-block"><code>&lt;h:outputText value="#{saludoBean.mensaje}" /&gt;</code></pre>
+
+                    <p>Este código mostrará el mensaje del Bean `SaludoBean`.</p>
+                </div>
+
+                <hr>
+
+                <div>
+                    <h2>Ventajas de Usar JSF</h2>
+                    <ul>
+                        <li>Separación clara entre lógica de negocio y presentación.</li>
+                        <li>Componentes reutilizables y personalizables.</li>
+                        <li>Amplia integración con otros frameworks (EJB, CDI, PrimeFaces).</li>
+                        <li>Facilita el desarrollo de aplicaciones empresariales robustas.</li>
+                    </ul>
+                </div>
             </main>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
