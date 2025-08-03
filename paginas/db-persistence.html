@@ -97,12 +97,13 @@
                     <h3>Estructura Básica</h3>
                     <p>La estructura del archivo es relativamente sencilla. El elemento raíz es <strong>
                             <persistence>
-                        </strong>, que contiene uno o más elementos <strong><persistence-unit></strong>.</p>
+                        </strong>el que contiene uno o más elementos<strong><persistence-unit></strong>.</p>
+                    <p>La configuración fue omitida puesto que no se considera como algo tan relevante.</p>
                     <pre class="code-block"><code>persistence
     
     persistence-unit (name="nombre-de-tu-unidad", transaction-type="RESOURCE_LOCAL")
 
-        --- Aquí va el resto de la configuración ---
+        - - - - - - - - - -
     
     /persistence-unit
 
@@ -119,7 +120,7 @@
                     <div class="placeholder-box my-3">
                         <div class="text-center p-4 bg-light border">
                             <img src="../imagenes/DB/diagramaPersistence.png" class="img-fluid mx-auto d-block"
-                                alt="Mapeo de Entidad a Tabla">
+                                alt="Diagrama Persistence">
                         </div>
                     </div>
 
