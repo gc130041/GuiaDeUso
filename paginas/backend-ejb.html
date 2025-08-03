@@ -62,7 +62,101 @@
             </aside>
             <main class="col-md-9 content">
                 <h1>EJB: Enterprise JavaBeans</h1>
-                <div class="placeholder-box">Contenido de EJB...</div>
+                <div class="mb-4">
+                    <h2>Teoría</h2>
+                    <p>Los <strong>Enterprise JavaBeans (EJB)</strong> son componentes del lado del servidor en la plataforma Java EE (ahora Jakarta EE) diseñados para desarrollar aplicaciones empresariales distribuidas, escalables y transaccionales. Los EJB se ejecutan en un contenedor EJB que proporciona servicios como gestión de transacciones, seguridad, concurrencia y persistencia, permitiendo a los desarrolladores centrarse en la lógica de negocio.</p>
+                    <p>Existen tres tipos principales de EJB: <strong>Session Beans</strong> (para lógica de negocio), <strong>Entity Beans</strong> (para representar datos, aunque ahora reemplazados por JPA), y <strong>Message-Driven Beans</strong> (para procesar mensajes asíncronos). Los Session Beans, a su vez, se dividen en Stateful (mantienen estado) y Stateless (sin estado). Los EJB se integran con otras tecnologías como Servlets y JPA para construir aplicaciones robustas.</p>
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/Backend/EJBDiagrama.png" class="img-fluid mx-auto d-block" alt="Diagrama de la arquitectura de EJB" style="width: 80%;">
+                    </div>
+                    <h3>Conceptos Fundamentales</h3>
+                    <ul>
+                        <li><strong>Contenedor EJB:</strong> Proporciona el entorno de ejecución, gestionando servicios como transacciones y seguridad.</li>
+                        <li><strong>Session Beans:</strong> Implementan la lógica de negocio, siendo Stateless para tareas generales o Stateful para sesiones específicas.</li>
+                        <li><strong>Message-Driven Beans:</strong> Procesan mensajes de sistemas como JMS (Java Message Service).</li>
+                        <li><strong>Inyección de Dependencias:</strong> Usa anotaciones como <code>@EJB</code> para inyectar beans en otros componentes.</li>
+                    </ul>
+                </div>
+
+                <hr>
+
+                <div class="mb-4">
+                    <h2>Práctica</h2>
+                    <p>Para utilizar EJB en un proyecto Maven, es necesario configurar las dependencias y plugins adecuados en el archivo <code>pom.xml</code>. A continuación, se describe la configuración específica para EJB.</p>
+                    <h3>Configuración en Maven</h3>
+                    <p>El archivo <code>pom.xml</code> debe incluir la dependencia para la API de Jakarta EE, que incluye las bibliotecas necesarias para EJB, y el plugin para empaquetar la aplicación como un archivo EAR o WAR. A continuación, se muestra un ejemplo:</p>
+                    <pre class="code-block"><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax&lt;/groupId&gt;
+        &lt;artifactId&gt;javaee-api&lt;/artifactId&gt;
+        &lt;version&gt;8.0&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-ear-plugin&lt;/artifactId&gt;
+            &lt;version&gt;3.0.2&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;version&gt;8&lt;/version&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;</code></pre>
+                    <p>En esta configuración:</p>
+                    <ul>
+                        <li><strong>Dependencia <code>javaee-api</code>:</strong> Proporciona las APIs para EJB y otras tecnologías de Jakarta EE. El alcance <code>provided</code> indica que el servidor de aplicaciones (como WildFly o GlassFish) incluye estas bibliotecas.</li>
+                        <li><strong>Plugin <code>maven-ear-plugin</code>:</strong> Empaqueta la aplicación como un archivo EAR (Enterprise Archive), adecuado para aplicaciones EJB, especificando la versión de Jakarta EE.</li>
+                    </ul>
+                    <h3>Creación de un EJB</h3>
+                    <p>Un EJB se crea definiendo una interfaz y una clase de implementación, utilizando anotaciones como <code>@Stateless</code> o <code>@Stateful</code>. La interfaz define los métodos accesibles, mientras que la clase implementa la lógica.</p>
+                    <h4>Anotaciones Principales:</h4>
+                    <ul>
+                        <li><code>@Stateless</code>: Indica un bean sin estado para tareas generales.</li>
+                        <li><code>@Stateful</code>: Indica un bean con estado para sesiones específicas.</li>
+                        <li><code>@Remote</code> o <code>@Local</code>: Define la interfaz de acceso remoto o local.</li>
+                    </ul>
+                </div>
+
+                <hr>
+
+                <div>
+                    <h2>Ejemplos de Uso</h2>
+                    <p>A continuación, se presentan ejemplos prácticos de cómo implementar un EJB para gestionar una lógica de negocio sencilla.</p>
+                    <h3>1. EJB Stateless para Gestión de Pedidos</h3>
+                    <p>Este ejemplo muestra un EJB Stateless que calcula el total de un pedido.</p>
+                    <pre class="code-block"><code>import javax.ejb.Stateless;
+
+@Stateless
+public class PedidoEJB {
+    public double calcularTotal(double precio, int cantidad) {
+        return precio * cantidad;
+    }
+}</code></pre>
+                    <h3>2. Uso del EJB desde un Servlet</h3>
+                    <p>Este ejemplo muestra cómo inyectar e invocar un EJB desde un Servlet.</p>
+                    <pre class="code-block"><code>import javax.ejb.EJB;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/calcularPedido")
+public class PedidoServlet extends HttpServlet {
+    @EJB
+    private PedidoEJB pedidoEJB;
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        double total = pedidoEJB.calcularTotal(50.0, 3);
+        response.getWriter().write("Total: " + total);
+    }
+}</code></pre>
+                </div>
             </main>
         </div>
     </div>
