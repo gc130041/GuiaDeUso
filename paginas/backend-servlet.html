@@ -62,7 +62,156 @@
             </aside>
             <main class="col-md-9 content">
                 <h1>Servlets</h1>
-                <div class="placeholder-box">Contenido de Servlets...</div>
+                <div class="mb-4">
+                    <h2>Teoría</h2>
+                    <p>Los <strong>Servlets</strong> son componentes de Java que se ejecutan en un servidor web para manejar solicitudes y respuestas HTTP en aplicaciones web. Son parte fundamental de la tecnología Java EE (ahora Jakarta EE) y se utilizan comúnmente como controladores en el patrón de diseño Model-View-Controller (MVC). En este patrón, los Servlets actúan como el <strong>Controlador</strong>, procesando las solicitudes del cliente (como navegadores), coordinando con el <strong>Modelo</strong> (lógica de negocio y datos, a menudo implementada con JavaBeans) y delegando la presentación al <strong>Vista</strong> (típicamente JSP). Esto permite crear aplicaciones web dinámicas y estructuradas.</p>
+                    <p>Un Servlet es una clase Java que extiende <code>javax.servlet.http.HttpServlet</code> y sobrescribe métodos como <code>doGet</code> y <code>doPost</code> para manejar solicitudes HTTP GET y POST, respectivamente. Los Servlets pueden interactuar con bases de datos a través del Modelo y generar contenido dinámico, como páginas HTML o JSON. Además, pueden incluir ayudantes (como clases adicionales) para asistir en la lógica del controlador.</p>
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/Backend/DiagramaServlet.png" class="img-fluid mx-auto d-block" alt="Diagrama de la arquitectura MVC con Servlets" style="width: 80%;">
+                    </div>
+                    <h3>Conceptos Fundamentales</h3>
+                    <ul>
+                        <li><strong>Ciclo de Vida:</strong> Un Servlet pasa por las fases de inicialización (<code>init</code>), servicio (<code>service</code>, que delega a <code>doGet</code>, <code>doPost</code>, etc.) y destrucción (<code>destroy</code>).</li>
+                        <li><strong>Configuración con Maven:</strong> En un proyecto Maven, los Servlets requieren dependencias como <code>javax.servlet-api</code> o <code>jakarta.servlet-api</code> en el archivo <code>pom.xml</code>.</li>
+                        <li><strong>Gestión de Sesiones:</strong> Los Servlets pueden usar <code>HttpSession</code> para mantener el estado del usuario entre múltiples solicitudes.</li>
+                        <li><strong>Mapeo de URLs:</strong> Los Servlets se mapean a URLs específicas mediante anotaciones como <code>@WebServlet("/ruta")</code> o en el archivo <code>web.xml</code>.</li>
+                    </ul>
+                </div>
+
+                <hr>
+
+                <div class="mb-4">
+                    <h2>Práctica</h2>
+                    <p>Para usar Servlets en un proyecto Maven, se deben configurar las dependencias y plugins adecuados en el archivo <code>pom.xml</code>. A continuación, se describe la configuración específica para Servlets.</p>
+                    <h3>Configuración en Maven</h3>
+                    <p>El archivo <code>pom.xml</code> debe incluir la dependencia para la API de Jakarta EE, que contiene las bibliotecas necesarias para Servlets, y el plugin para empaquetar la aplicación como un archivo WAR. A continuación, se muestra un ejemplo:</p>
+                    <pre class="code-block"><code>&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax&lt;/groupId&gt;
+        &lt;artifactId&gt;javaee-api&lt;/artifactId&gt;
+        &lt;version&gt;8.0&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+
+&lt;build&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+            &lt;artifactId&gt;maven-war-plugin&lt;/artifactId&gt;
+            &lt;version&gt;2.3&lt;/version&gt;
+            &lt;configuration&gt;
+                &lt;failOnMissingWebXml&gt;false&lt;/failOnMissingWebXml&gt;
+            &lt;/configuration&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;</code></pre>
+                    <p>En esta configuración:</p>
+                    <ul>
+                        <li><strong>Dependencia <code>javaee-api</code>:</strong> Proporciona las APIs para Servlets y otras tecnologías de Jakarta EE. El alcance <code>provided</code> indica que el contenedor (como Tomcat) incluye estas bibliotecas en tiempo de ejecución.</li>
+                        <li><strong>Plugin <code>maven-war-plugin</code>:</strong> Empaqueta la aplicación como un archivo WAR, con <code>failOnMissingWebXml</code> establecido en <code>false</code> para permitir el uso de anotaciones como <code>@WebServlet</code> sin necesidad de un archivo <code>web.xml</code>.</li>
+                    </ul>
+                    <h3>Creación de un Servlet</h3>
+                    <p>Un Servlet básico se crea extendiendo <code>HttpServlet</code> y sobrescribiendo métodos como <code>doGet</code> o <code>doPost</code>. La anotación <code>@WebServlet</code> se usa para mapear el Servlet a una URL específica.</p>
+                    <h4>Métodos Principales:</h4>
+                    <ul>
+                        <li><code>doGet(HttpServletRequest, HttpServletResponse)</code>: Maneja solicitudes GET, como cargar una página o recuperar datos.</li>
+                        <li><code>doPost(HttpServletRequest, HttpServletResponse)</code>: Maneja solicitudes POST, como enviar formularios.</li>
+                        <li><code>HttpSession</code>: Permite gestionar sesiones de usuario para mantener datos entre solicitudes.</li>
+                    </ul>
+                </div>
+
+                <hr>
+
+                <div>
+                    <h2>Ejemplos de Uso</h2>
+                    <p>A continuación, se presentan ejemplos prácticos basados en aplicaciones web reales, como un sistema de gestión de productos y autenticación de usuarios.</p>
+                    <h3>1. Servlet para CRUD de Productos</h3>
+                    <p>Este Servlet maneja operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para una entidad "Gorra".</p>
+                    <pre class="code-block"><code>import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import dao.GorrasDAO;
+import modelo.Gorras;
+
+@WebServlet(name = "GorrasCRUDServlet", urlPatterns = {"/mantenimiento/gorras/*"})
+public class GorrasCRUDServlet extends HttpServlet {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        String accion = request.getPathInfo() != null ? request.getPathInfo() : "/listar";
+        GorrasDAO dao = new GorrasDAO();
+        
+        switch (accion) {
+            case "/agregar":
+                if (request.getMethod().equalsIgnoreCase("GET")) {
+                    // Mostrar formulario
+                } else {
+                    // Guardar nueva gorra
+                    Gorras gorra = new Gorras();
+                    gorra.setModelo(request.getParameter("modelo"));
+                    dao.guardar(gorra);
+                    response.sendRedirect(request.getContextPath() + "/mantenimiento/gorras/listar");
+                }
+                break;
+            case "/listar":
+                // Listar todas las gorras
+                request.setAttribute("listaGorras", dao.listarTodas());
+                request.getRequestDispatcher("/pages/productos.jsp").forward(request, response);
+                break;
+        }
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        processRequest(request, response);
+    }
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        processRequest(request, response);
+    }
+}</code></pre>
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/Backend/FormularioGorras.png" class="img-fluid mx-auto d-block" alt="Formulario de gestión de gorras" style="width: 80%;">
+                    </div>
+                    <h3>2. Servlet para Autenticación</h3>
+                    <p>Este Servlet maneja el proceso de login de usuarios, incluyendo la funcionalidad de "recordarme" con cookies.</p>
+                    <pre class="code-block"><code>import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import modelo.Usuario;
+import dao.UsuarioDAO;
+
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        Usuario usuario = usuarioDAO.verificarCredenciales(email, password);
+        
+        if (usuario != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("usuario", usuario);
+            response.sendRedirect(request.getContextPath() + "/gorras");
+        } else {
+            request.setAttribute("error", "Correo o contraseña inválidos");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
+    }
+}</code></pre>
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/Backend/LoginServlet.png" class="img-fluid mx-auto d-block" alt="Formulario de login generado por el Servlet" style="width: 90%;">
+                    </div>
+                </div>
             </main>
         </div>
     </div>
