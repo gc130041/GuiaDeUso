@@ -3,13 +3,46 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.landing-page {
+    padding-top: 56px;
+}
+
 .navbar-brand {
     font-weight: bold;
     font-size: 1.5rem;
 }
 
 .navbar {
-    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+    padding: 6rem 0;
+}
+
+.hero-section .btn-light {
+    font-weight: bold;
+}
+
+.category-card {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 0.75rem;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.category-icon i {
+    font-size: 3rem;
 }
 
 .page-wrapper {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,21 +9,29 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../estilos/manual.css">
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="../index.html">Manual de Desarrollo</a>
+            <a class="navbar-brand" href="../index.html">
+                <i class="bi bi-book-half"></i>
+                 Manual de Desarrollo
+            </a>
         </div>
     </nav>
+
     <div class="page-wrapper container-fluid">
         <div class="row">
             <aside class="col-md-3 sidenav">
                 <div class="accordion accordion-flush sidebar-accordion" id="sidebarAccordion">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingFrontend">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFrontend" aria-expanded="true" aria-controls="collapseFrontend">Frontend</button>
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFrontend" aria-expanded="true"
+                                aria-controls="collapseFrontend">Frontend</button>
                         </h2>
-                        <div id="collapseFrontend" class="accordion-collapse collapse show" aria-labelledby="headingFrontend" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseFrontend" class="accordion-collapse collapse show"
+                            aria-labelledby="headingFrontend" data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="frontend-html.html">HTML</a>
                                 <a href="frontend-css.html">CSS</a>
@@ -34,9 +43,12 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingBackend">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBackend" aria-expanded="false" aria-controls="collapseBackend">Backend</button>
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseBackend" aria-expanded="false"
+                                aria-controls="collapseBackend">Backend</button>
                         </h2>
-                        <div id="collapseBackend" class="accordion-collapse collapse" aria-labelledby="headingBackend" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseBackend" class="accordion-collapse collapse" aria-labelledby="headingBackend"
+                            data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="backend-maven.html">Maven y pom.xml</a>
                                 <a href="backend-servlet.html">Servlets</a>
@@ -47,9 +59,12 @@
                     </div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingDb">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDb" aria-expanded="false" aria-controls="collapseDb">DB / Persistencia</button>
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseDb" aria-expanded="false" aria-controls="collapseDb">DB /
+                                Persistencia</button>
                         </h2>
-                        <div id="collapseDb" class="accordion-collapse collapse" aria-labelledby="headingDb" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseDb" class="accordion-collapse collapse" aria-labelledby="headingDb"
+                            data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="db-jpa.html">JPA</a>
                                 <a href="db-persistence.html">persistence.xml</a>
@@ -64,19 +79,31 @@
                 <h1>Bootstrap: Framework de CSS</h1>
                 <div class="mb-4">
                     <h2>Teoría</h2>
-                    <p><strong>Bootstrap</strong> es el framework de CSS, HTML y JavaScript más popular del mundo para desarrollar sitios web responsivos y "mobile-first". Permite a los desarrolladores crear interfaces de usuario atractivas y funcionales de manera rápida y eficiente, sin necesidad de escribir código CSS desde cero.</p>
-                    <p>La principal ventaja de Bootstrap es su enorme colección de componentes predefinidos y su potente sistema de grid. En lugar de definir estilos manualmente, aplicas clases CSS preexistentes directamente a tus elementos HTML para darles estilo y comportamiento, lo que garantiza consistencia y ahorra una gran cantidad de tiempo.</p>
+                    <p><strong>Bootstrap</strong> es el framework de CSS, HTML y JavaScript más popular del mundo para
+                        desarrollar sitios web responsivos y "mobile-first". Permite a los desarrolladores crear
+                        interfaces de usuario atractivas y funcionales de manera rápida y eficiente, sin necesidad de
+                        escribir código CSS desde cero.</p>
+                    <p>La principal ventaja de Bootstrap es su enorme colección de componentes predefinidos y su potente
+                        sistema de grid. En lugar de definir estilos manualmente, aplicas clases CSS preexistentes
+                        directamente a tus elementos HTML para darles estilo y comportamiento, lo que garantiza
+                        consistencia y ahorra una gran cantidad de tiempo.</p>
                     <div class="placeholder-box my-3">
                         <img src="../imagenes/Frontend/bootstraplogo.jpg" class="img-fluid mx-auto d-block"
-                            alt="Logo de Bootstrap"
-                            style="width: 50%;">
+                            alt="Logo de Bootstrap" style="width: 50%;">
                     </div>
 
                     <h3>Conceptos Fundamentales</h3>
                     <ul>
-                        <li><strong>Sistema de Grid (Grid System):</strong> Es el corazón de Bootstrap. Permite crear diseños de página flexibles y responsivos que se adaptan a diferentes tamaños de pantalla (móviles, tablets, escritorios) utilizando un sistema de 12 columnas.</li>
-                        <li><strong>Componentes Predefinidos:</strong> Bootstrap ofrece una amplia gama de componentes listos para usar, como botones, barras de navegación, tarjetas (cards), modales, formularios y carruseles, con estilos y funcionalidades ya implementados.</li>
-                        <li><strong>Clases de Utilidad (Utility Classes):</strong> Son clases CSS muy específicas que realizan una única función, como añadir márgenes (<code>m-2</code>), padding (<code>p-3</code>), alinear texto (<code>text-center</code>) o cambiar colores (<code>bg-success</code>, <code>text-white</code>).</li>
+                        <li><strong>Sistema de Grid (Grid System):</strong> Es el corazón de Bootstrap. Permite crear
+                            diseños de página flexibles y responsivos que se adaptan a diferentes tamaños de pantalla
+                            (móviles, tablets, escritorios) utilizando un sistema de 12 columnas.</li>
+                        <li><strong>Componentes Predefinidos:</strong> Bootstrap ofrece una amplia gama de componentes
+                            listos para usar, como botones, barras de navegación, tarjetas (cards), modales, formularios
+                            y carruseles, con estilos y funcionalidades ya implementados.</li>
+                        <li><strong>Clases de Utilidad (Utility Classes):</strong> Son clases CSS muy específicas que
+                            realizan una única función, como añadir márgenes (<code>m-2</code>), padding
+                            (<code>p-3</code>), alinear texto (<code>text-center</code>) o cambiar colores
+                            (<code>bg-success</code>, <code>text-white</code>).</li>
                     </ul>
                 </div>
 
@@ -84,10 +111,13 @@
 
                 <div class="mb-4">
                     <h2>Práctica</h2>
-                    <p>Usar Bootstrap es tan simple como incluir sus archivos CSS y JavaScript en tu documento HTML y empezar a usar sus clases.</p>
-                    
+                    <p>Usar Bootstrap es tan simple como incluir sus archivos CSS y JavaScript en tu documento HTML y
+                        empezar a usar sus clases.</p>
+
                     <h3>El Sistema de Grid en Acción</h3>
-                    <p>El grid se basa en tres componentes principales: el contenedor (<code>.container</code>), la fila (<code>.row</code>) y las columnas (<code>.col-*</code>). Las columnas dentro de una fila siempre deben sumar un máximo de 12.</p>
+                    <p>El grid se basa en tres componentes principales: el contenedor (<code>.container</code>), la fila
+                        (<code>.row</code>) y las columnas (<code>.col-*</code>). Las columnas dentro de una fila
+                        siempre deben sumar un máximo de 12.</p>
                     <pre class="code-block"><code><div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -100,12 +130,12 @@
 </div></code></pre>
                     <div class="placeholder-box my-3">
                         <img src="../imagenes/Frontend/bootstrapgrid.png" class="img-fluid mx-auto d-block"
-                            alt="(Diagrama visual del sistema de Grid con container, row y cols)"
-                            style="width: 50%;">
+                            alt="(Diagrama visual del sistema de Grid con container, row y cols)" style="width: 50%;">
                     </div>
 
                     <h3>Uso de Componentes: La Tarjeta (Card)</h3>
-                    <p>Las tarjetas son contenedores flexibles y extensibles. El siguiente ejemplo muestra cómo crear una tarjeta básica con una imagen, un cuerpo y un botón.</p>
+                    <p>Las tarjetas son contenedores flexibles y extensibles. El siguiente ejemplo muestra cómo crear
+                        una tarjeta básica con una imagen, un cuerpo y un botón.</p>
                     <pre class="code-block"><code><div class="card" style="width: 18rem;">
     <div class="card-body">
         <h5 class="card-title">Título de la Tarjeta</h5>
@@ -119,15 +149,15 @@
 
                 <div>
                     <h2>Ejemplo Completo</h2>
-                    <p>A continuación, se muestra un ejemplo de una página HTML completa que utiliza una barra de navegación, un contenedor principal con el sistema de grid y varias tarjetas para crear un diseño de página común.</p>
-
+                    <p>A continuación, se muestra un ejemplo de una página HTML completa que utiliza una barra de
+                        navegación, un contenedor principal con el sistema de grid y varias tarjetas para crear un
+                        diseño de página común.</p>
                     <pre class="code-block"><code><!doctype html>
 <html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Página con Bootstrap</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -168,17 +198,18 @@
         </div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html></code></pre>
 
                     <h3>Resultado Final</h3>
-                    <p>Al abrir el archivo HTML anterior en un navegador, Bootstrap aplicará automáticamente todos los estilos. El resultado será una página web moderna y responsiva, con una barra de navegación oscura y una sección de contenido con tres tarjetas alineadas horizontalmente, como se muestra en la siguiente imagen.</p>
+                    <p>Al abrir el archivo HTML anterior en un navegador, Bootstrap aplicará automáticamente todos los
+                        estilos. El resultado será una página web moderna y responsiva, con una barra de navegación
+                        oscura y una sección de contenido con tres tarjetas alineadas horizontalmente, como se muestra
+                        en la siguiente imagen.</p>
 
                     <div class="placeholder-box my-3">
                         <img src="../imagenes/Frontend/paginafinal.png" class="img-fluid mx-auto d-block"
-                            alt="Captura de pantalla del resultado final del ejemplo completo"
-                            style="width: 100%;">
+                            alt="Captura de pantalla del resultado final del ejemplo completo" style="width: 100%;">
                     </div>
                 </div>
             </main>
@@ -186,4 +217,5 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html> 
+
+</html>
