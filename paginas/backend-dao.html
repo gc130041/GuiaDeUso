@@ -62,7 +62,114 @@
             </aside>
             <main class="col-md-9 content">
                 <h1>Patrón DAO (Data Access Object)</h1>
-                <div class="placeholder-box">Contenido del Patrón DAO...</div>
+                <div class="mb-4">
+                    <h2>Teoría</h2>
+                    <p>El patrón <strong>DAO (Data Access Object)</strong> es un patrón de diseño utilizado para 
+                        separar la lógica de acceso a datos de la lógica de negocio de una aplicación. 
+                        Su objetivo principal es encapsular el código de persistencia (consultas SQL, 
+                        conexiones, transacciones, etc.) en una capa dedicada, permitiendo que el resto 
+                        de la aplicación trabaje con objetos simples sin preocuparse por los detalles de 
+                        la base de datos.</p>
+                    <p>De esta forma, el patrón DAO proporciona:</p>
+                    <ul>
+                        <li><strong>Abstracción:</strong> El código que usa los datos no necesita saber cómo se 
+                            almacenan o recuperan.</li>
+                        <li><strong>Mantenibilidad:</strong> Cambiar la base de datos o la tecnología de acceso 
+                            (JDBC, JPA, Hibernate) no afecta al resto de la aplicación.</li>
+                        <li><strong>Reutilización:</strong> Los métodos de acceso a datos pueden reutilizarse 
+                            en diferentes partes de la aplicación.</li>
+                    </ul>
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/Backend/dao-data-access-object-acronym-260nw-2035773377.png" class="img-fluid mx-auto d-block" 
+                             alt="Diagrama de arquitectura DAO" style="width: 50%;">
+                    </div>
+                    <h3>Estructura básica del patrón DAO</h3>
+                    <p>La estructura de un DAO se compone de varias capas que trabajan en conjunto para desacoplar 
+                        el acceso a datos de la lógica de negocio. En la parte superior se encuentra la lógica de negocio 
+                        (servicios o controladores) que no interactúa directamente con la base de datos, sino que utiliza 
+                        una interfaz DAO. Esta interfaz define las operaciones que se pueden realizar sobre los datos 
+                        (como crear, leer, actualizar y eliminar registros).</p>
+                    <p>Detrás de esta interfaz existe una clase de implementación que contiene el código específico de 
+                        conexión y manipulación de datos, utilizando tecnologías como JDBC, JPA o Hibernate. Finalmente, 
+                        en la parte inferior se encuentra la base de datos, que es la fuente real de la información.</p>
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/Backend/Imagen1.png" class="img-fluid mx-auto d-block" 
+                             alt="Estructura del patrón DAO" style="width: 70%;">
+                    </div>
+                    <p class="text-muted text-center">
+                        <em>La imagen representa cómo se organiza la arquitectura DAO: la lógica de negocio se comunica con una 
+                        interfaz DAO sin conocer los detalles internos de la base de datos, permitiendo cambiar el motor 
+                        de base de datos o la tecnología de persistencia sin afectar el resto de la aplicación. 
+                        Esta separación mejora la mantenibilidad, la escalabilidad y la facilidad de pruebas del software.</em>
+                    </p>
+                </div>
+
+                <hr>
+
+                <div class="mb-4">
+                    <h2>Práctica</h2>
+                    <p>La implementación del patrón DAO implica definir una interfaz que describe las operaciones 
+                        de acceso a datos (CRUD), y una o más clases concretas que implementan esta interfaz utilizando 
+                        una tecnología específica (como JDBC o JPA).</p>
+
+                    <h3>Componentes principales:</h3>
+                    <ul>
+                        <li><strong>Entidad (Entity):</strong> Clase Java que representa una tabla de la base de datos.</li>
+                        <li><strong>DAO Interface:</strong> Define los métodos para trabajar con la entidad 
+                            (insertar, buscar, actualizar, eliminar).</li>
+                        <li><strong>DAO Implementación:</strong> Clase que contiene el código concreto de acceso 
+                            a la base de datos.</li>
+                    </ul>
+
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/Backend/mvc.png" class="img-fluid mx-auto d-block" 
+                             alt="Estructura del patrón DAO" style="width: 50%;">
+                    </div>
+                </div>
+
+                <hr>
+
+                <div>
+                    <h2>Ejemplo básico de uso</h2>
+                    <h3>1. Clase Entidad</h3>
+<pre class="code-block"><code>public class Producto {
+    private int id;
+    private String nombre;
+    private double precio;
+    // Getters y setters
+}</code></pre>
+
+                    <h3>2. Interfaz DAO</h3>
+<pre class="code-block"><code>public interface ProductoDAO {
+    void insertar(Producto p);
+    Producto obtenerPorId(int id);
+    List&lt;Producto&gt; listarTodos();
+    void actualizar(Producto p);
+    void eliminar(int id);
+}</code></pre>
+
+                    <h3>3. Implementación DAO (ejemplo con JDBC)</h3>
+<pre class="code-block"><code>public class ProductoDAOImpl implements ProductoDAO {
+    private Connection conn;
+
+    public ProductoDAOImpl(Connection conn) {
+        this.conn = conn;
+    }
+
+    @Override
+    public void insertar(Producto p) {
+        String sql = "INSERT INTO productos(nombre, precio) VALUES (?, ?)";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, p.getNombre());
+            ps.setDouble(2, p.getPrecio());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    // Resto de métodos...
+}</code></pre>
+                </div>
             </main>
         </div>
     </div>
