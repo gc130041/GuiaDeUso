@@ -1,28 +1,33 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Manual - Backend - Maven</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../estilos/manual.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="../estilos/manual.css" />
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="../index.html">Manual de Desarrollo</a>
         </div>
     </nav>
+
     <div class="page-wrapper container-fluid">
         <div class="row">
             <aside class="col-md-3 sidenav">
                 <div class="accordion accordion-flush sidebar-accordion" id="sidebarAccordion">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingFrontend">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFrontend" aria-expanded="false" aria-controls="collapseFrontend">Frontend</button>
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFrontend" aria-expanded="false" aria-controls="collapseFrontend">Frontend</button>
                         </h2>
-                        <div id="collapseFrontend" class="accordion-collapse collapse" aria-labelledby="headingFrontend" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseFrontend" class="accordion-collapse collapse" aria-labelledby="headingFrontend"
+                            data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="frontend-html.html">HTML</a>
                                 <a href="frontend-css.html">CSS</a>
@@ -32,11 +37,14 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingBackend">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseBackend" aria-expanded="true" aria-controls="collapseBackend">Backend</button>
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseBackend" aria-expanded="true" aria-controls="collapseBackend">Backend</button>
                         </h2>
-                        <div id="collapseBackend" class="accordion-collapse collapse show" aria-labelledby="headingBackend" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseBackend" class="accordion-collapse collapse show" aria-labelledby="headingBackend"
+                            data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="backend-maven.html" class="active">Maven y pom.xml</a>
                                 <a href="backend-servlet.html">Servlets</a>
@@ -45,11 +53,14 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="headingDb">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDb" aria-expanded="false" aria-controls="collapseDb">DB / Persistencia</button>
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseDb" aria-expanded="false" aria-controls="collapseDb">DB / Persistencia</button>
                         </h2>
-                        <div id="collapseDb" class="accordion-collapse collapse" aria-labelledby="headingDb" data-bs-parent="#sidebarAccordion">
+                        <div id="collapseDb" class="accordion-collapse collapse" aria-labelledby="headingDb"
+                            data-bs-parent="#sidebarAccordion">
                             <div class="accordion-body">
                                 <a href="db-jpa.html">JPA</a>
                                 <a href="db-persistence.html">persistence.xml</a>
@@ -60,12 +71,109 @@
                     </div>
                 </div>
             </aside>
+
             <main class="col-md-9 content">
                 <h1>Maven y pom.xml</h1>
-                <div class="placeholder-box">Contenido de Maven y pom.xml...</div>
+
+                <div class="mb-4">
+                    <h2>¿Qué es Maven?</h2>
+                    <p>
+                        Maven es una herramienta de gestión y automatización de proyectos para aplicaciones Java.
+                        Simplifica la construcción, reporte y documentación de proyectos a través de un modelo de
+                        objetos estandarizado y un archivo de configuración centralizado llamado <code>pom.xml</code>.
+                    </p>
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/Backend/maven-dependencies.jpg" class="img-fluid mx-auto d-block"
+                            alt="Arquitectura de Maven" style="width: 40%;" />
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h2>Ventajas de usar Maven</h2>
+                    <ul>
+                        <li>Gestión automática de dependencias y versiones.</li>
+                        <li>Estandarización en la estructura de proyectos.</li>
+                        <li>Integración con sistemas de construcción y CI/CD.</li>
+                        <li>Facilita la gestión de ciclos de vida del proyecto (compilar, testear, empaquetar, desplegar).</li>
+                    </ul>
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/Backend/Maven-arch.png" class="img-fluid mx-auto d-block"
+                            alt="Ventajas de Maven" style="width: 50%;" />
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="mb-4">
+                    <h2>¿Qué es el archivo pom.xml?</h2>
+                    <p>
+                        El archivo <code>pom.xml</code> (Project Object Model) es el archivo de configuración principal
+                        que Maven utiliza para administrar el proyecto. Define dependencias, plugins, información del
+                        proyecto y configuraciones del ciclo de vida.
+                    </p>
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/Backend/Ejemplo de pom.png" class="img-fluid mx-auto d-block"
+                            alt="Ejemplo de pom.xml" style="width: 50%;" />
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h3>Estructura básica del pom.xml</h3>
+                    <pre class="code-block"><code>&lt;project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd"&gt;
+    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+
+    &lt;groupId&gt;com.ejemplo&lt;/groupId&gt;
+    &lt;artifactId&gt;mi-proyecto&lt;/artifactId&gt;
+    &lt;version&gt;1.0.0&lt;/version&gt;
+
+    &lt;dependencies&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;junit&lt;/groupId&gt;
+            &lt;artifactId&gt;junit&lt;/artifactId&gt;
+            &lt;version&gt;4.12&lt;/version&gt;
+            &lt;scope&gt;test&lt;/scope&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/project&gt;</code></pre>
+                </div>
+
+                <hr />
+
+                <div class="mb-4">
+                    <h2>Comandos básicos de Maven</h2>
+                    <ul>
+                        <li><code>mvn clean</code>: Limpia el directorio de compilación.</li>
+                        <li><code>mvn compile</code>: Compila el código fuente del proyecto.</li>
+                        <li><code>mvn test</code>: Ejecuta los tests unitarios.</li>
+                        <li><code>mvn package</code>: Empaqueta el proyecto en un archivo JAR o WAR.</li>
+                        <li><code>mvn install</code>: Instala el artefacto en el repositorio local.</li>
+                        <li><code>mvn deploy</code>: Despliega el artefacto a un repositorio remoto.</li>
+                    </ul>
+                </div>
+
+                <hr />
+
+                <div class="mb-4">
+                    <h2>Repositorio local de Maven</h2>
+                    <p>
+                        Maven guarda las dependencias descargadas y los artefactos construidos en un repositorio local,
+                        ubicado normalmente en <code>~/.m2/repository</code>. Esto evita descargar repetidamente las
+                        mismas dependencias en diferentes proyectos.
+                    </p>
+                    <div class="placeholder-box my-3">
+                        <img src="../imagenes/Backend/Maven repositorio.jpeg" class="img-fluid mx-auto d-block"
+                            alt="Repositorio local de Maven" style="width: 40%;" />
+                    </div>
+                </div>
+
             </main>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
